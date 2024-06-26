@@ -23,8 +23,11 @@
         // 1. 对同一个对象进行响应式处理, 我们应该做缓存
         const state1 = reactive(obj);
         const state2 = reactive(obj);
+        // 2. 对已经进行响应处理的对象，再次处理，应该不需要重复处理
+        // state1 被代理过，一定具有 get, set 方法
+        const state3 = reactive(state1);
 
-        console.log(state1 === state2);
+        console.log(state1 === state3);
 
         // effect(() => {
         //   app.innerHTML = `
