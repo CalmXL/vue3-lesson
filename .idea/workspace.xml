@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: reactivity 创建基本目录结构">
+    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: 响应式数据再次reactive, 直接返回">
+      <change afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rfcs/1_question.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" afterDir="false" />
@@ -23,12 +25,17 @@
   "associatedIndex": 6
 }]]></component>
   <component name="ProjectId" id="2iOp804XvWCJ9Fv6V9YCWh1gnSB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JavaScript 调试.index.html.executor": "Debug",
+    "Node.js.1_question.js.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "javascript.nodejs.core.library.configured.version": "16.20.2",
@@ -47,6 +54,16 @@
       <recent name="E:\i\vue3-lesson" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="1_question.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/rfcs/1_question.js" working-dir="$PROJECT_DIR$/rfcs">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.1_question.js" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -62,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719371315192</updated>
-      <workItem from="1719371316887" duration="16621000" />
+      <workItem from="1719371316887" duration="19049000" />
     </task>
     <task id="LOCAL-00001" summary="feat: monorepo init + esbuild packages">
       <option name="closed" value="true" />
@@ -96,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719394556334</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: 响应式数据再次reactive, 直接返回">
+      <option name="closed" value="true" />
+      <created>1719400404732</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719400404732</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +143,7 @@
     <MESSAGE value="feat: api 详细查看" />
     <MESSAGE value="feat: 对同一个对象响应式处理，添加缓存" />
     <MESSAGE value="feat: reactivity 创建基本目录结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: reactivity 创建基本目录结构" />
+    <MESSAGE value="feat: 响应式数据再次reactive, 直接返回" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 响应式数据再次reactive, 直接返回" />
   </component>
 </project>

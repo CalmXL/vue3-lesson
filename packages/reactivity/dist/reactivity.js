@@ -7,20 +7,20 @@ function isObject(value) {
   return typeof value === "object" && value !== null;
 }
 
-// packages/reactivity/src/reactive.ts
-var reactiveMap = /* @__PURE__ */ new WeakMap();
+// packages/reactivity/src/baseHandler.ts
 var mutableHandlers = {
   get(target, key, receiver) {
     if (key === "__v_isReactive" /* ISREACTIVE */) return true;
+    return Reflect.get(target, key, receiver);
   },
   set(target, key, value, receiver) {
+    Reflect.set(target, key, value, receiver);
     return false;
   }
 };
-function reactive(target) {
-  return createReactiveObject(target);
-}
 
+// packages/reactivity/src/reactive.ts
+var reactiveMap = /* @__PURE__ */ new WeakMap();
 function createReactiveObject(target) {
   if (!isObject(target)) return target;
   if (target["__v_isReactive" /* ISREACTIVE */]) {
@@ -31,6 +31,9 @@ function createReactiveObject(target) {
   let proxy = new Proxy(target, mutableHandlers);
   reactiveMap.set(target, proxy);
   return proxy;
+}
+function reactive(target) {
+  return createReactiveObject(target);
 }
 export {
   effect,
