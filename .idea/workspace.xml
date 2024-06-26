@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="" />
+    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: monorepo init + esbuild packages">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 6
@@ -21,6 +27,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "javascript.nodejs.core.library.configured.version": "16.20.2",
     "javascript.nodejs.core.library.typings.version": "16.18.101",
     "node.js.detected.package.eslint": "true",
@@ -52,11 +59,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719371315192</updated>
-      <workItem from="1719371316887" duration="9805000" />
+      <workItem from="1719371316887" duration="11806000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: monorepo init + esbuild packages">
+      <option name="closed" value="true" />
+      <created>1719388640031</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719388640031</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: monorepo init + esbuild packages" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: monorepo init + esbuild packages" />
   </component>
 </project>

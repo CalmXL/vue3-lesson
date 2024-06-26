@@ -7,14 +7,38 @@ import { createRequire } from 'module';
 import esbuild from 'esbuild';
 
 // node中的命令行参数，通过 process 来获取 process.argv
-const args = minimist(process.argv.slice(2));
-const __filename = fileURLToPath(import.meta.url); // 获取文件的绝对路径 file:
-console.log(__filename); // => E:\i\vue3-lesson\scripts\dev.js
+/**
+ * process.argv 获取命令行参数的属性。返回一个数组
+ * [
+ *   'C:\\Program Files\\nodejs\\node.exe', // node.js 可执行文件的路径。
+ *   'E:\\i\\vue3-lesson\\scripts\\dev.js', // 运行的 js 文件的路径。
+ *   'reactivity', // 后续元素
+ *   '-f',
+ *   'esm'
+ * ]
+ */
+// console.log(process.argv);
+const args = minimist(process.argv.slice(2)); // 去除前两项
+/**
+ * node dev.js reactivity -f esm
+ * 运行脚本       位置参数    短参数
+ * {
+ *    _: [ 'reactivity' ],
+ *    f: 'esm'
+ * }
+ */
+console.log(args);
+
+// console.log(import.meta.url); // => file:///E:/i/vue3-lesson/scripts/dev.js
+const __filename = fileURLToPath(import.meta.url); // 将文件URL 转换成文件路径
+// console.log(__filename); // => E:\i\vue3-lesson\scripts\dev.js
 
 // node 中 esm 模块没有 __dirname
 const __dirname = dirname(__filename);
-console.log(__dirname); // => E:\i\vue3-lesson\scripts
+// console.log(__dirname); // => E:\i\vue3-lesson\scripts
 
+
+// Nodejs 提供的一个用于在 ES6 模块中创建 commonJS 风格的 require 函数。
 const require = createRequire(import.meta.url); // es6 中不存在 require
 // console.log(require);
 
