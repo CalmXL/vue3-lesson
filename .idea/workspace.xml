@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: monorepo init + esbuild packages">
+    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: api 详细查看">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719371315192</updated>
-      <workItem from="1719371316887" duration="11806000" />
+      <workItem from="1719371316887" duration="14975000" />
     </task>
     <task id="LOCAL-00001" summary="feat: monorepo init + esbuild packages">
       <option name="closed" value="true" />
@@ -69,14 +71,34 @@
       <option name="project" value="LOCAL" />
       <updated>1719388640031</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: api 详细查看">
+      <option name="closed" value="true" />
+      <created>1719390753687</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719390753687</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: monorepo init + esbuild packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: monorepo init + esbuild packages" />
+    <MESSAGE value="feat: api 详细查看" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: api 详细查看" />
   </component>
 </project>
