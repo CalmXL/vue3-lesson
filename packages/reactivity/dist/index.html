@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        // import {reactive, effect} from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
+        import {
+          reactive,
+          effect
+        } from "./reactivity.js";
+
+        const obj = {
+          name: 'xl',
+          age: 30
+        }
+        // 1. 对同一个对象进行响应式处理, 我们应该做缓存
+        const state1 = reactive(obj);
+        const state2 = reactive(obj);
+
+        console.log(state1 === state2);
+
+        // effect(() => {
+        //   app.innerHTML = `
+        //     <div>name: ${ state.name }</div>
+        //     <div>age: ${ state.age }</div>
+        //    `
+        // })
+
+        // setTimeout(() => {
+        //   state.name = 'xh';
+        // }, 1000);
+
+    </script>
+</body>
+</html>
