@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: 响应式数据再次reactive, 直接返回">
-      <change afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rfcs/1_question.js" afterDir="false" />
+    <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: Proxy 和 Reflect 解决的问题">
+      <change afterPath="$PROJECT_DIR$/packages/reactivity/src/reactiveEffect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rfcs/2_effect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rfcs/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rfcs/1_question.js" beforeDir="false" afterPath="$PROJECT_DIR$/rfcs/1_Proxy-Reflect.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +24,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2iOp804XvWCJ9Fv6V9YCWh1gnSB" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -36,8 +39,10 @@
   "keyToString": {
     "JavaScript 调试.index.html.executor": "Debug",
     "Node.js.1_question.js.executor": "Debug",
+    "Node.js.2_effect.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "javascript.nodejs.core.library.configured.version": "16.20.2",
     "javascript.nodejs.core.library.typings.version": "16.18.101",
     "node.js.detected.package.eslint": "true",
@@ -45,6 +50,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.vue",
     "ts.external.directory.path": "E:\\i\\vue3-lesson\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -54,13 +60,17 @@
       <recent name="E:\i\vue3-lesson" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="1_question.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/rfcs/1_question.js" working-dir="$PROJECT_DIR$/rfcs">
+  <component name="RunManager" selected="Node.js.2_effect.js">
+    <configuration name="1_Proxy-Reflect.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/rfcs/1_Proxy-Reflect.js" working-dir="$PROJECT_DIR$/rfcs">
+      <method v="2" />
+    </configuration>
+    <configuration name="2_effect.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/rfcs/2_effect.js" working-dir="$PROJECT_DIR$/rfcs">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.1_question.js" />
+        <item itemvalue="Node.js.2_effect.js" />
+        <item itemvalue="Node.js.1_Proxy-Reflect.js" />
       </list>
     </recent_temporary>
   </component>
@@ -79,7 +89,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719371315192</updated>
-      <workItem from="1719371316887" duration="19049000" />
+      <workItem from="1719371316887" duration="19185000" />
+      <workItem from="1719403663043" duration="97000" />
+      <workItem from="1719403769228" duration="637000" />
+      <workItem from="1719452720397" duration="820000" />
+      <workItem from="1719453811758" duration="9898000" />
     </task>
     <task id="LOCAL-00001" summary="feat: monorepo init + esbuild packages">
       <option name="closed" value="true" />
@@ -121,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719400404732</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: Proxy 和 Reflect 解决的问题">
+      <option name="closed" value="true" />
+      <created>1719402839610</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719402839610</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +166,10 @@
     <MESSAGE value="feat: 对同一个对象响应式处理，添加缓存" />
     <MESSAGE value="feat: reactivity 创建基本目录结构" />
     <MESSAGE value="feat: 响应式数据再次reactive, 直接返回" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 响应式数据再次reactive, 直接返回" />
+    <MESSAGE value="feat: Proxy 和 Reflect 解决的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Proxy 和 Reflect 解决的问题" />
+  </component>
+  <component name="VueSettings">
+    <option name="innerServiceType" value="DISABLED" />
   </component>
 </project>

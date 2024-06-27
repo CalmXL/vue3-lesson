@@ -29,18 +29,28 @@
         // console.log(state1 === state3);
 
         const state = reactive(obj);
-        console.log(state.name, state.age);
+        const _effect = effect(() => {
+          app.innerHTML = `
+            <div>name: ${ state.name }</div>
+            <div>age: ${ state.age }</div>
+           `
+        })
 
+        setTimeout(() => {
+          // 在 effect 外部使用, 不应该进行依赖收集
+          state.age ++;
+        }, 1000);
+
+        // effect 嵌套
         // effect(() => {
-        //   app.innerHTML = `
-        //     <div>name: ${ state.name }</div>
-        //     <div>age: ${ state.age }</div>
-        //    `
+        //   console.log(state.name);
+        //
+        //   effect(() => {
+        //     console.log(state.age);
+        //   })
+        //
+        //   console.log(state.age);
         // })
-
-        // setTimeout(() => {
-        //   state.name = 'xh';
-        // }, 1000);
 
     </script>
 </body>
