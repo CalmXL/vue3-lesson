@@ -11,6 +11,8 @@ export function effect (fn, options?) {
 }
 
 export let activeEffect;
+
+// effectScope.stop)() 停止所有的 effect 不参加响应式处理
 class ReactiveEffect {
   active = true; // 创建的 effect 是响应的
   // fn 用户编写的函数
@@ -30,5 +32,9 @@ class ReactiveEffect {
     } finally {
        activeEffect = lastEffect;
     }
+  }
+
+  stop() {
+    this.active = false;
   }
 }

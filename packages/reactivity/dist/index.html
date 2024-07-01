@@ -36,6 +36,12 @@
            `
         })
 
+        effect(() => {
+          app.innerHTML = `
+          <div>age: ${ state.name }</div>
+          `
+        })
+
         setTimeout(() => {
           // 在 effect 外部使用, 不应该进行依赖收集
           state.age ++;

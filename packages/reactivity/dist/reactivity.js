@@ -28,11 +28,29 @@ var ReactiveEffect = class {
       activeEffect = lastEffect;
     }
   }
+  stop() {
+    this.active = false;
+  }
 };
 
 // packages/shared/src/index.ts
 function isObject(value) {
   return typeof value === "object" && value !== null;
+}
+
+// packages/reactivity/src/reactiveEffect.ts
+var targetMap = /* @__PURE__ */ new WeakMap();
+function track(target, key) {
+  let depsMap = targetMap.get(target);
+  if (!depsMap) {
+    depsMap = /* @__PURE__ */ new Map();
+    targetMap.set(target, depsMap);
+  }
+  let dep = depsMap.get(key);
+  if (!dep) {
+    depsMap.set(key, /* @__PURE__ */ new Map());
+  }
+  console.log(depsMap);
 }
 
 // packages/reactivity/src/baseHandler.ts

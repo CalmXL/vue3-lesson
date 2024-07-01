@@ -1,4 +1,5 @@
 import {activeEffect} from "./effect";
+import {track} from "./reactiveEffect";
 
 export enum ReactiveFlags {
   ISREACTIVE = '__v_isReactive',
