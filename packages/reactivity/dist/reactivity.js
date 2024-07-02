@@ -14,6 +14,10 @@ var ReactiveEffect = class {
   constructor(fn, scheduler) {
     this.fn = fn;
     this.scheduler = scheduler;
+    this._trackId = 0;
+    // 用于记录当前 effect 执行了几次
+    this.deps = [];
+    this._depsLength = 0;
     this.active = true;
   }
   run() {
@@ -32,6 +36,17 @@ var ReactiveEffect = class {
     this.active = false;
   }
 };
+function trackEffect(effect2, dep) {
+  dep.set(effect2, effect2._trackId);
+  effect2.deps[effect2._depsLength++] = dep;
+}
+function triggerEffects(dep) {
+  for (const effect2 of dep.keys()) {
+    if (effect2.scheduler) {
+      effect2.scheduler();
+    }
+  }
+}
 
 // packages/shared/src/index.ts
 function isObject(value) {
@@ -40,6 +55,12 @@ function isObject(value) {
 
 // packages/reactivity/src/reactiveEffect.ts
 var targetMap = /* @__PURE__ */ new WeakMap();
+var createDep = (cleanup, key) => {
+  const dep = /* @__PURE__ */ new Map();
+  dep.cleanup = cleanup;
+  dep.name = key;
+  return dep;
+};
 function track(target, key) {
   let depsMap = targetMap.get(target);
   if (!depsMap) {
@@ -48,9 +69,20 @@ function track(target, key) {
   }
   let dep = depsMap.get(key);
   if (!dep) {
-    depsMap.set(key, /* @__PURE__ */ new Map());
+    depsMap.set(
+      key,
+      dep = createDep(() => depsMap.delete(key), key)
+    );
   }
-  console.log(depsMap);
+  activeEffect && trackEffect(activeEffect, dep);
+}
+function trigger(target, key, value, oldValue) {
+  const deps = targetMap.get(target);
+  if (!deps) return;
+  let dep = deps.get(key);
+  if (dep) {
+    triggerEffects(dep);
+  }
 }
 
 // packages/reactivity/src/baseHandler.ts
@@ -61,7 +93,12 @@ var mutableHandlers = {
     return Reflect.get(target, key, receiver);
   },
   set(target, key, value, receiver) {
-    return Reflect.set(target, key, value, receiver);
+    let oldValue = target[key];
+    let result = Reflect.set(target, key, value, receiver);
+    if (oldValue !== value) {
+      trigger(target, key, value, oldValue);
+    }
+    return result;
   }
 };
 
@@ -84,6 +121,8 @@ function reactive(target) {
 export {
   activeEffect,
   effect,
-  reactive
+  reactive,
+  trackEffect,
+  triggerEffects
 };
 //# sourceMappingURL=reactivity.js.map

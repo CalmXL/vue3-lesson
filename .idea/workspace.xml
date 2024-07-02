@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb958390-c1a0-47ff-b3f7-743d609de3a9" name="更改" comment="feat: ReactEffect">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/dist/reactivity.js" afterDir="false" />
@@ -12,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/reactiveEffect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/reactiveEffect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "CalmXL"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:CalmXL/vue3-lesson.git",
+    "accountId": "ed8a2e9d-902f-452d-b0d1-26b547599e69"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -32,26 +46,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript 调试.index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.1_question.js.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.2_effect.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.20.2&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.101&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.vue&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\i\\vue3-lesson\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript 调试.index.html.executor": "Debug",
+    "Node.js.1_question.js.executor": "Debug",
+    "Node.js.2_effect.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "16.20.2",
+    "javascript.nodejs.core.library.typings.version": "16.18.101",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.vue",
+    "ts.external.directory.path": "/Users/xulei/code/js++/i/vue3-lesson/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\i\vue3-lesson" />
