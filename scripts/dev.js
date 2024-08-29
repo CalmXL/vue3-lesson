@@ -27,7 +27,6 @@ const args = minimist(process.argv.slice(2)); // 去除前两项
  *    f: 'esm'
  * }
  */
-console.log(args);
 
 // console.log(import.meta.url); // => file:///E:/i/vue3-lesson/scripts/dev.js
 const __filename = fileURLToPath(import.meta.url); // 将文件URL 转换成文件路径
@@ -45,6 +44,7 @@ const require = createRequire(import.meta.url); // es6 中不存在 require
 const target = args._[0] || "reactivity"; // 打包哪个项目
 const format = args.f || 'iife'; // 打包后的模块规范
 
+
 // 入口文件 根据命令行提供的路径来进行解析
 const entry = resolve(__dirname, `../packages/${target}/src/index.ts`);
 const pkg = require(`../packages/${target}/package.json`);
@@ -57,7 +57,7 @@ esbuild.context({
   platform: 'browser', // 打包后给浏览器使用
   sourcemap: true, // 调试源代码
   format, // 格式
-  globalName: pkg.buildOptions?.name, // iife 需要的全局名字
+  globalName: pkg.buildOptions.name, // iife 需要的全局名字
 }).then((ctx) => {
   console.log('start dev');
 
