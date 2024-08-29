@@ -12,7 +12,7 @@ function preCleanEffect(effect2) {
   effect2._trackId++;
 }
 function postCleanEffect(effect2) {
-  if (effect2.deps.length > effect2._depsLength) {
+  if (effect2.deps?.length > effect2._depsLength) {
     for (let i = effect2._depsLength; i < effect2.deps.length; i++) {
       cleanDepEffect(effect2.deps[i], effect2);
     }

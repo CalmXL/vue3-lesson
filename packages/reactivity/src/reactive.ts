@@ -4,6 +4,11 @@ import { mutableHandlers, ReactiveFlags } from './baseHandler';
 // 用于记录我们的 代理后的结果，可以复用
 const reactiveMap = new WeakMap();
 
+/**
+ * * 创建响应式对象
+ * @param target
+ * @returns
+ */
 function createReactiveObject(target: any) {
   // 统一做判断，target 必须为对象
   if (!isObject(target)) return target;
@@ -18,6 +23,7 @@ function createReactiveObject(target: any) {
   if (existProxy) return existProxy;
 
   let proxy = new Proxy(target, mutableHandlers);
+  // 缓存被代理的对象
   reactiveMap.set(target, proxy);
   return proxy;
 }

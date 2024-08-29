@@ -1,9 +1,16 @@
+/**
+ * * 副作用函数, 首次执行会将其中的依赖进行收集
+ * @param fn       调用的函数
+ * @param options  配置项
+ * @returns
+ */
 export function effect(fn, options?) {
   // 创建一个响应式 effect，数据变化后可以重新执行
   const _effect = new ReactiveEffect(fn, () => {
     _effect.run();
   });
 
+  // 首次执行
   _effect.run();
 
   return _effect;
@@ -11,13 +18,17 @@ export function effect(fn, options?) {
 
 export let activeEffect;
 
+/**
+ * *
+ * @param effect
+ */
 function preCleanEffect(effect) {
   effect._depsLength = 0;
   effect._trackId++; // 每次执行 id 都要 + 1, 如果当前同一个 effect 执行, id 就是相同的
 }
 
 function postCleanEffect(effect) {
-  if (effect.deps.length > effect._depsLength) {
+  if (effect.deps?.length > effect._depsLength) {
     for (let i = effect._depsLength; i < effect.deps.length; i++) {
       // 删除映射表中对应的 effects
       cleanDepEffect(effect.deps[i], effect);
@@ -28,6 +39,10 @@ function postCleanEffect(effect) {
 }
 
 // effectScope.stop() 停止所有的 effect 不参加响应式处理
+
+/**
+ * ReactiveEffect 类
+ */
 class ReactiveEffect {
   _trackId = 0; // 用于记录当前 effect 执行了几次
   deps = [];
@@ -44,6 +59,7 @@ class ReactiveEffect {
     }
 
     let lastEffect = activeEffect;
+
     try {
       activeEffect = this;
 
@@ -78,7 +94,6 @@ function cleanDepEffect(dep, effect) {
 export function trackEffect(effect, dep) {
   if (dep.get(effect) !== effect._trackId) {
     dep.set(effect, effect._trackId); // 更新 id
-    // console.log('优化多于的收集');
     let oldDep = effect.deps[effect._depsLength];
     if (oldDep !== dep) {
       if (oldDep) {

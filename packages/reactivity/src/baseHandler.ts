@@ -6,6 +6,7 @@ export enum ReactiveFlags {
 
 export const mutableHandlers: ProxyHandler<any> = {
   get(target, key, receiver) {
+    // NOTE:
     if (key === ReactiveFlags.ISREACTIVE) return true;
     // 依赖收集
     track(target, key);

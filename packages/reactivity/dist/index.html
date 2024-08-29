@@ -17,10 +17,10 @@
       // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
       import { reactive, effect } from './reactivity.js';
 
-      // const obj = {
-      //   name: 'xl',
-      //   age: 30,
-      // };
+      const obj = {
+        name: 'xl',
+        age: 30,
+      };
       // 1. 对同一个对象进行响应式处理, 我们应该做缓存
       // const state1 = reactive(obj);
       // const state2 = reactive(obj);
@@ -29,19 +29,19 @@
       // const state3 = reactive(state1);
       // console.log(state1 === state3);
 
-      // const state = reactive(obj);
-      // const _effect = effect(() => {
-      //   app.innerHTML = `
-      //       <div>name: ${state.name}</div>
-      //       <div>age: ${state.age}</div>
-      //      `;
-      // });
+      const state = reactive(obj);
+      const _effect = effect(() => {
+        app.innerHTML = `
+            <div>name: ${state.name}</div>
+            <div>age: ${state.age}</div>
+           `;
+      });
 
-      // effect(() => {
-      //   app.innerHTML = `
-      //     <div>age: ${ state.name }</div>
-      //   `
-      // })
+      effect(() => {
+        app.innerHTML = `
+          <div>age: ${state.name}</div>
+        `;
+      });
 
       // setTimeout(() => {
       //   // 在 effect 外部使用, 不应该进行依赖收集
@@ -63,29 +63,29 @@
       //   console.log(state.age);
       // })
 
-      let obj = { name: 'xl', age: 30, flag: true };
-      const state = reactive(obj);
+      // let obj = { name: 'xl', age: 30, flag: true };
+      // const state = reactive(obj);
 
-      // flag: true => { obj: { flag: (effect), name: (effect)}}
-      // 此处 name 应该被删除
-      // flag: false => { obj: { flag: (effect), name: (effect), age: (effect)}}
-      effect(() => {
-        console.log('runner');
-        app.innerHTML = state.flag ? state.name : state.age;
-      });
-
+      // // flag: true => { obj: { flag: (effect), name: (effect)}}
+      // // 此处 name 应该被删除
+      // // flag: false => { obj: { flag: (effect), name: (effect), age: (effect)}}
       // effect(() => {
-      //   app.innerHTML = state.flag + state.flag + state.flag;
+      //   console.log('runner');
+      //   app.innerHTML = state.flag ? state.name : state.age;
       // });
 
-      setTimeout(() => {
-        state.flag = false;
-      }, 1000);
+      // // effect(() => {
+      // //   app.innerHTML = state.flag + state.flag + state.flag;
+      // // });
 
-      setTimeout(() => {
-        console.log('修改属性后,不应该触发 Effect 重新执行');
-        state.name = 'xlCool';
-      }, 1000);
+      // setTimeout(() => {
+      //   state.flag = false;
+      // }, 1000);
+
+      // setTimeout(() => {
+      //   console.log('修改属性后,不应该触发 Effect 重新执行');
+      //   state.name = 'xlCool';
+      // }, 1000);
 
       /*
         我们需要一个算法,来对比不同分支的时候的差异
