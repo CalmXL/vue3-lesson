@@ -59,8 +59,9 @@ function postCleanEffect(effect) {
 class ReactiveEffect {
   public active = true; // 创建的 effect 是响应的
   _trackId = 0; // 用于记录当前 effect 执行了几次
-  deps = []; // 用于记录 dep
   _depsLength = 0; // 默认收集个数，用于保证deps顺序
+  _running = 0;
+  deps = []; // 用于记录 dep
 
   // fn 用户编写的函数
   // 如果 fn 中依赖数据发生变化，需要重新调用scheduler -> run()
@@ -79,8 +80,10 @@ class ReactiveEffect {
 
       // effect 重新执行前，需要将上一次的依赖情况 effect.deps 清空
       preCleanEffect(this);
+      this._running++;
       return this.fn();
     } finally {
+      this._running--;
       postCleanEffect(this);
       // 执行结束后, 将上一次的 activeEffect 赋值回来
       activeEffect = lastEffect;
@@ -151,7 +154,10 @@ export function trackEffect(effect, dep) {
 export function triggerEffects(dep) {
   for (const effect of dep.keys()) {
     if (effect.scheduler) {
-      effect.scheduler(); // -> effect.run()
+      if (!effect._running) {
+        // 如果不是正在执行，才能执行
+        effect.scheduler(); // -> effect.run()
+      }
     }
   }
 }

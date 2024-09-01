@@ -25,7 +25,7 @@ function postCleanEffect(effect2) {
   }
 }
 var ReactiveEffect = class {
-  // 默认收集个数，用于保证deps顺序
+  // 用于记录 dep
   // fn 用户编写的函数
   // 如果 fn 中依赖数据发生变化，需要重新调用scheduler -> run()
   constructor(fn, scheduler) {
@@ -35,9 +35,10 @@ var ReactiveEffect = class {
     // 创建的 effect 是响应的
     this._trackId = 0;
     // 用于记录当前 effect 执行了几次
-    this.deps = [];
-    // 用于记录 dep
     this._depsLength = 0;
+    // 默认收集个数，用于保证deps顺序
+    this._running = 0;
+    this.deps = [];
   }
   run() {
     if (!this.active) {
@@ -47,8 +48,10 @@ var ReactiveEffect = class {
     try {
       activeEffect = this;
       preCleanEffect(this);
+      this._running++;
       return this.fn();
     } finally {
+      this._running--;
       postCleanEffect(this);
       activeEffect = lastEffect;
     }
@@ -81,7 +84,9 @@ function trackEffect(effect2, dep) {
 function triggerEffects(dep) {
   for (const effect2 of dep.keys()) {
     if (effect2.scheduler) {
-      effect2.scheduler();
+      if (!effect2._running) {
+        effect2.scheduler();
+      }
     }
   }
 }
@@ -125,7 +130,11 @@ var mutableHandlers = {
   get(target, key, receiver) {
     if (key === "__v_isReactive" /* ISREACTIVE */) return true;
     track(target, key);
-    return Reflect.get(target, key, receiver);
+    let res = Reflect.get(target, key, receiver);
+    if (isObject(res)) {
+      return reactive(res);
+    }
+    return res;
   },
   set(target, key, value, receiver) {
     let oldValue = target[key];
