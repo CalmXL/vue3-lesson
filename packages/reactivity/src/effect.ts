@@ -6,7 +6,9 @@
  */
 export function effect(fn, options?) {
   // 创建一个响应式 effect，数据变化后可以重新执行
+  // 创建一个 effect, 只要依赖的属性变化了,就要重新执行回调
   const _effect = new ReactiveEffect(fn, () => {
+    // scheduler
     _effect.run();
   });
 
@@ -44,20 +46,21 @@ function postCleanEffect(effect) {
  * ReactiveEffect 类
  */
 class ReactiveEffect {
+  public active = true; // 创建的 effect 是响应的
   _trackId = 0; // 用于记录当前 effect 执行了几次
-  deps = [];
+  deps = []; // 用于记录 dep
   _depsLength = 0;
 
-  active = true; // 创建的 effect 是响应的
   // fn 用户编写的函数
-  // 如果 fn 中依赖数据发生变化，需要重新调用 -> run()
+  // 如果 fn 中依赖数据发生变化，需要重新调用scheduler -> run()
   constructor(public fn, public scheduler) {}
 
   run() {
     if (!this.active) {
-      return this.fn();
+      return this.fn(); // 不做额外的处理
     }
 
+    // 保存上一次的 activeEffect
     let lastEffect = activeEffect;
 
     try {
@@ -65,10 +68,10 @@ class ReactiveEffect {
 
       // effect 重新执行前，需要将上一次的依赖情况 effect.deps 清空
       preCleanEffect(this);
-
       return this.fn();
     } finally {
       postCleanEffect(effect);
+      // 执行结束后, 将上一次的 activeEffect 赋值回来
       activeEffect = lastEffect;
     }
   }
@@ -90,14 +93,13 @@ function cleanDepEffect(dep, effect) {
  * 1. _trackId 用于记录执行次数(防止一个属性在当前effect中多次依赖收集) 只收集一次
  * 2. 拿到上一次依赖的最后一个和这次的比较
  */
-
 export function trackEffect(effect, dep) {
   if (dep.get(effect) !== effect._trackId) {
     dep.set(effect, effect._trackId); // 更新 id
     let oldDep = effect.deps[effect._depsLength];
     if (oldDep !== dep) {
       if (oldDep) {
-        // 删除掉老 的
+        // 删除掉老的
         cleanDepEffect(oldDep, effect);
       }
       // 换成新的

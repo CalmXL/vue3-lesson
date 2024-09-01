@@ -1,8 +1,8 @@
 // 收集的结构
-// {  weakMap
+// {  weakMap:
 //    {name: 'xl', age: 27 }: {  => Map
-//     name: [effect1, effect2],
-//     age: [effect]
+//     name: {effect1, effect},
+//     age: {effect}
 //   }
 // }
 import { activeEffect, trackEffect, triggerEffects } from './effect';
