@@ -90,11 +90,11 @@
       // }, 1000);
 
       /*
-        我们需要一个算法,来对比不同分支的时候的差异
-        {flag, name}
-          ->
-        {flag, age}
-      */
+            我们需要一个算法,来对比不同分支的时候的差异
+            {flag, name}
+              ->
+            {flag, age}
+          */
 
       // --------------------调度执行------------------------
       // import { reactive, effect } from './reactivity.js';
@@ -123,22 +123,41 @@
       // }, 1000);
 
       // -------深度代理----------------------
-      import { reactive, effect } from './reactivity.js';
+      // import { reactive, effect } from './reactivity.js';
       // import {
       //   reactive,
       //   effect,
       // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
+      // let obj = { name: 'xl', age: 30, flag: true, address: { n: 1 } };
+      // const state = reactive(obj);
+
+      // effect(() => {
+      //   app.innerHTML = state.address.n;
+      //   // 如果本次在执行 effect 的时候，更新了数据，不会触发effect更新
+      //   // state.name = Math.random();
+      // });
+
+      // setTimeout(() => {
+      //   state.address.n = 999;
+      // }, 1000);
+
+      // ------------ref实现原理-----------------
+      import { reactive, effect, ref } from './reactivity.js';
+      // import {
+      //   reactive,
+      //   effect,
+      //   ref,
+      // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
       let obj = { name: 'xl', age: 30, flag: true, address: { n: 1 } };
-      const state = reactive(obj);
+
+      const flag = ref(false);
 
       effect(() => {
-        app.innerHTML = state.address.n;
-        // 如果本次在执行 effect 的时候，更新了数据，不会触发effect更新
-        // state.name = Math.random();
+        app.innerHTML = flag.value ? 'xl' : 'xh';
       });
 
       setTimeout(() => {
-        state.address.n = 999;
+        flag.value = true;
       }, 1000);
     </script>
   </body>
