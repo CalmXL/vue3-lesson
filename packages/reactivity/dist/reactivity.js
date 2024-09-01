@@ -4,7 +4,12 @@ function effect(fn, options) {
     _effect.run();
   });
   _effect.run();
-  return _effect;
+  if (options) {
+    Object.assign(_effect, options);
+  }
+  const runner = _effect.run.bind(_effect);
+  runner.effect = _effect;
+  return runner;
 }
 var activeEffect;
 function preCleanEffect(effect2) {
@@ -20,17 +25,19 @@ function postCleanEffect(effect2) {
   }
 }
 var ReactiveEffect = class {
-  // 创建的 effect 是响应的
+  // 默认收集个数，用于保证deps顺序
   // fn 用户编写的函数
-  // 如果 fn 中依赖数据发生变化，需要重新调用 -> run()
+  // 如果 fn 中依赖数据发生变化，需要重新调用scheduler -> run()
   constructor(fn, scheduler) {
     this.fn = fn;
     this.scheduler = scheduler;
+    this.active = true;
+    // 创建的 effect 是响应的
     this._trackId = 0;
     // 用于记录当前 effect 执行了几次
     this.deps = [];
+    // 用于记录 dep
     this._depsLength = 0;
-    this.active = true;
   }
   run() {
     if (!this.active) {
@@ -42,7 +49,7 @@ var ReactiveEffect = class {
       preCleanEffect(this);
       return this.fn();
     } finally {
-      postCleanEffect(effect);
+      postCleanEffect(this);
       activeEffect = lastEffect;
     }
   }

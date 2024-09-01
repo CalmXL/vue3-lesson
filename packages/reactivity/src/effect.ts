@@ -15,7 +15,13 @@ export function effect(fn, options?) {
   // 首次执行
   _effect.run();
 
-  return _effect;
+  if (options) {
+    Object.assign(_effect, options); // 用用户传递的覆盖掉内置的
+  }
+
+  const runner = _effect.run.bind(_effect);
+  runner.effect = _effect; // 可以在 run 方法上获取到 effect 的引用
+  return runner; // 外界可以自己让其 run
 }
 
 export let activeEffect;
@@ -75,7 +81,7 @@ class ReactiveEffect {
       preCleanEffect(this);
       return this.fn();
     } finally {
-      postCleanEffect(effect);
+      postCleanEffect(this);
       // 执行结束后, 将上一次的 activeEffect 赋值回来
       activeEffect = lastEffect;
     }
