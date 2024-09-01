@@ -14,7 +14,7 @@ export const mutableHandlers: ProxyHandler<any> = {
     return Reflect.get(target, key, receiver);
   },
   set(target, key, value, receiver) {
-    // 设置，让对应的 effect 重新执行
+    // 找到属性，让对应的 effect 重新执行
     let oldValue = target[key];
     let result = Reflect.set(target, key, value, receiver);
     if (oldValue !== value) {
