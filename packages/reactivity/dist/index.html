@@ -142,23 +142,23 @@
       // }, 1000);
 
       // ------------ref实现原理-----------------
-      import {
-        reactive,
-        effect,
-        ref,
-        toRef,
-        toRefs,
-        proxyRefs,
-      } from './reactivity.js';
+      // import {
+      //   reactive,
+      //   effect,
+      //   ref,
+      //   toRef,
+      //   toRefs,
+      //   proxyRefs,
+      // } from './reactivity.js';
       // import {
       //   reactive,
       //   effect,
       //   ref,
       //   toRef,
       // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
-      let obj = { name: 'xl', age: 30, flag: true, address: { n: 1 } };
+      // let obj = { name: 'xl', age: 30, flag: true, address: { n: 1 } };
 
-      const flag = ref(false);
+      // const flag = ref(false);
 
       // effect(() => {
       //   app.innerHTML = flag.value ? 'xl' : 'xh';
@@ -169,18 +169,54 @@
       // }, 1000);
 
       // toRef toRefs
-      let state = { name: 'xl', age: 22 }; // 还是基于 proxy 来获取值的
-      // let name = toRef(state, 'name');
+      // let state = { name: 'xl', age: 22 }; // 还是基于 proxy 来获取值的
+      // // let name = toRef(state, 'name');
 
-      let { name, age } = toRefs(state);
+      // let { name, age } = toRefs(state);
 
-      let proxy = proxyRefs({ ...toRefs(state), a: 1 });
+      // let proxy = proxyRefs({ ...toRefs(state), a: 1 });
 
-      proxy.age = 100;
-      proxy.a = 200;
-      effect(() => {
-        console.log(proxy.name, proxy.age, proxy.a);
+      // proxy.age = 100;
+      // proxy.a = 200;
+      // effect(() => {
+      //   console.log(proxy.name, proxy.age, proxy.a);
+      // });
+    </script>
+
+    <script type="module">
+      // compute
+      import {
+        ref,
+        reactive,
+        effect,
+        computed,
+      } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
+
+      // computed 计算属性
+      // computed 执行后的结构是一个 ref 不可变的
+      const state = reactive({
+        name: 'xl',
       });
+      const aliasName = computed(() => {
+        console.log('runner');
+
+        return '**' + state.name;
+      });
+      // 多次访问此属性，只会执行一次
+
+      effect(() => {
+        console.log(aliasName.value);
+        console.log(aliasName.value);
+        console.log(aliasName.value);
+      });
+
+      state.name = 'handsome xl';
+
+      // 描述实现原理
+      // 1. 计算属性维护了一个 dirty 属性，默认 true，稍后运行一次会将 dirty 变为 false, 并且稍后依赖的值变化会再次
+      // 让 dirty 变为 true
+      // 2. 计算属性也是一个 effect, 依赖的属性会收集这个计算属性，当值发生变化后，会让 computedEffect 里面的 dirty 变为 true
+      // 3. 计算属性具备收集能力的，可以收集对应的 effect, 依赖的值变化会触发 effect
     </script>
   </body>
 </html>
