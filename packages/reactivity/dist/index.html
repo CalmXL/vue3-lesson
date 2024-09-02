@@ -142,23 +142,45 @@
       // }, 1000);
 
       // ------------ref实现原理-----------------
-      import { reactive, effect, ref } from './reactivity.js';
+      import {
+        reactive,
+        effect,
+        ref,
+        toRef,
+        toRefs,
+        proxyRefs,
+      } from './reactivity.js';
       // import {
       //   reactive,
       //   effect,
       //   ref,
+      //   toRef,
       // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
       let obj = { name: 'xl', age: 30, flag: true, address: { n: 1 } };
 
       const flag = ref(false);
 
-      effect(() => {
-        app.innerHTML = flag.value ? 'xl' : 'xh';
-      });
+      // effect(() => {
+      //   app.innerHTML = flag.value ? 'xl' : 'xh';
+      // });
 
-      setTimeout(() => {
-        flag.value = true;
-      }, 1000);
+      // setTimeout(() => {
+      //   flag.value = true;
+      // }, 1000);
+
+      // toRef toRefs
+      let state = { name: 'xl', age: 22 }; // 还是基于 proxy 来获取值的
+      // let name = toRef(state, 'name');
+
+      let { name, age } = toRefs(state);
+
+      let proxy = proxyRefs({ ...toRefs(state), a: 1 });
+
+      proxy.age = 100;
+      proxy.a = 200;
+      effect(() => {
+        console.log(proxy.name, proxy.age, proxy.a);
+      });
     </script>
   </body>
 </html>

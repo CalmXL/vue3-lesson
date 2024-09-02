@@ -49,3 +49,50 @@ function triggerRefValue(ref) {
     triggerEffects(dep);
   }
 }
+
+class ObjectRefImply {
+  public __v_isRef = true;
+  constructor(public _object, public _key) {}
+
+  get value() {
+    return this._object[this._key];
+  }
+
+  set value(newValue) {
+    this._object[this._key] = newValue;
+  }
+}
+
+// toRef, toRefs
+export function toRef(object, key) {
+  return new ObjectRefImply(object, key);
+}
+
+export function toRefs(object) {
+  const res = {};
+
+  for (let key in object) {
+    res[key] = toRef(object, key);
+  }
+
+  return res;
+}
+
+export function proxyRefs(objectWithRef) {
+  return new Proxy(objectWithRef, {
+    get(target, key, receiver) {
+      let r = Reflect.get(target, key, receiver);
+      return r.__v_isRef ? r.value : r;
+    },
+    set(target, key, value, receiver) {
+      const oldValue = target[key];
+      if (oldValue.__v_isRef) {
+        // 如果老值是 ref, 需要给 ref 赋值
+        oldValue.value = value;
+        return true;
+      } else {
+        return Reflect.set(target, key, value, receiver);
+      }
+    },
+  });
+}

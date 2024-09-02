@@ -206,12 +206,55 @@ function triggerRefValue(ref2) {
     triggerEffects(dep);
   }
 }
+var ObjectRefImply = class {
+  constructor(_object, _key) {
+    this._object = _object;
+    this._key = _key;
+    this.__v_isRef = true;
+  }
+  get value() {
+    return this._object[this._key];
+  }
+  set value(newValue) {
+    this._object[this._key] = newValue;
+  }
+};
+function toRef(object, key) {
+  return new ObjectRefImply(object, key);
+}
+function toRefs(object) {
+  const res = {};
+  for (let key in object) {
+    res[key] = toRef(object, key);
+  }
+  return res;
+}
+function proxyRefs(objectWithRef) {
+  return new Proxy(objectWithRef, {
+    get(target, key, receiver) {
+      let r = Reflect.get(target, key, receiver);
+      return r.__v_isRef ? r.value : r;
+    },
+    set(target, key, value, receiver) {
+      const oldValue = target[key];
+      if (oldValue.__v_isRef) {
+        oldValue.value = value;
+        return true;
+      } else {
+        return Reflect.set(target, key, value, receiver);
+      }
+    }
+  });
+}
 export {
   activeEffect,
   effect,
+  proxyRefs,
   reactive,
   ref,
   toReactive,
+  toRef,
+  toRefs,
   trackEffect,
   triggerEffects
 };
