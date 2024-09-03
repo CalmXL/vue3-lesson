@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script type="module">
+    // import {
+    //   reactive,
+    //   watch,
+    //   watchEffect,
+    // } from '/node_modules/vue/dist/vue.esm-browser.js';
+
+    import { reactive, effect, computed, watch } from './reactivity.js';
+
+    const state = reactive({
+      name: 'xl',
+      age: 28,
+      address: {
+        n: 1,
+      },
+    });
+
+    watch(
+      state,
+      (newValue, oldValue) => {
+        console.log(newValue, oldValue);
+      },
+      {
+        deep: false, // 深度
+      }
+    );
+
+    setTimeout(() => {
+      // state.name = 'xlCool';
+      state.address.n = 101;
+    }, 1000);
+  </script>
+</html>
