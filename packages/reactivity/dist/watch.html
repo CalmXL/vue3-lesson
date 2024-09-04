@@ -10,11 +10,19 @@
   <script type="module">
     // import {
     //   reactive,
+    //   ref,
     //   watch,
     //   watchEffect,
     // } from '/node_modules/vue/dist/vue.esm-browser.js';
 
-    import { reactive, effect, computed, watch } from './reactivity.js';
+    import {
+      reactive,
+      effect,
+      ref,
+      computed,
+      watch,
+      watchEffect,
+    } from './reactivity.js';
 
     const state = reactive({
       name: 'xl',
@@ -24,19 +32,47 @@
       },
     });
 
-    watch(
-      state,
-      (newValue, oldValue) => {
-        console.log(newValue, oldValue);
-      },
-      {
-        deep: false, // 深度
-      }
-    );
+    const name = ref('xl');
+
+    // watch(
+    //   state,
+    //   (newValue, oldValue) => {
+    //     console.log(newValue, oldValue);
+    //   },
+    //   {
+    //     deep: false, // 深度
+    //   }
+    // );
+
+    // watch(
+    //   () => state.name,
+    //   (newValue, oldValue) => {
+    //     console.log(newValue, oldValue);
+    //   },
+    //   {
+    //     immediate: true,
+    //   }
+    // );
+
+    // watch(
+    //   name,
+    //   (newValue, oldValue) => {
+    //     console.log(newValue, oldValue);
+    //   },
+    //   {
+    //     deep: false, // 深度
+    //   }
+    // );
+
+    // ---------------------watchEffect----------------------
+    // watchEffect(() => {
+    //   console.log(state.name, state.age);
+    // });
 
     setTimeout(() => {
-      // state.name = 'xlCool';
-      state.address.n = 101;
+      state.name = 'xlCool';
+      // state.address.n = 101;
+      // name.value = 11;
     }, 1000);
   </script>
 </html>
