@@ -144,6 +144,7 @@ function trigger(target, key, value, oldValue) {
 var mutableHandlers = {
   get(target, key, receiver) {
     if (key === "__v_isReactive" /* ISREACTIVE */) return true;
+    debugger;
     track(target, key);
     let res = Reflect.get(target, key, receiver);
     if (isObject(res)) {
@@ -325,6 +326,7 @@ function traverse(source, depth, currentDepth = 0, seen = /* @__PURE__ */ new Se
   if (seen.has(source)) {
     return source;
   }
+  seen.add(source);
   for (let key in source) {
     traverse(source[key], depth, currentDepth, seen);
   }
@@ -355,6 +357,7 @@ function doWatch(source, cb, { deep, immediate }) {
     if (immediate) {
       job();
     } else {
+      debugger;
       oldValue = effect2.run();
     }
   } else {

@@ -18,7 +18,14 @@ export function watchEffect(source, options = {} as any) {
   return doWatch(source, null, options);
 }
 
-// 控制 depth 已经到了哪一层
+/**
+ * * 遍历对象的所有属性并触发这些属性的 getter，从而建立依赖关系
+ * @param source 对象(响应式的)
+ * @param depth 是否进行深度观察
+ * @param currentDepth
+ * @param seen 用于保存追踪过得属性, 防止循环引用
+ * @returns
+ */
 function traverse(source, depth, currentDepth = 0, seen = new Set()) {
   if (!isObject(source)) {
     return source;
@@ -35,6 +42,8 @@ function traverse(source, depth, currentDepth = 0, seen = new Set()) {
   if (seen.has(source)) {
     return source;
   }
+
+  seen.add(source);
 
   for (let key in source) {
     traverse(source[key], depth, currentDepth, seen);
@@ -82,6 +91,7 @@ function doWatch(source, cb, { deep, immediate }) {
     if (immediate) {
       job();
     } else {
+      debugger;
       oldValue = effect.run();
     }
   } else {

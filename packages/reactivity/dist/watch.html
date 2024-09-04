@@ -29,6 +29,10 @@
       age: 28,
       address: {
         n: 1,
+        dog: {
+          name: 'dog',
+          age: 1,
+        },
       },
     });
 
@@ -64,13 +68,23 @@
     //   }
     // );
 
+    watch(
+      state,
+      (newValue, oldValue) => {
+        console.log(newValue, oldValue);
+      },
+      {
+        deep: true,
+      }
+    );
+
     // ---------------------watchEffect----------------------
     // watchEffect(() => {
     //   console.log(state.name, state.age);
     // });
 
     setTimeout(() => {
-      state.name = 'xlCool';
+      state.address.dog.name = 'coolDog';
       // state.address.n = 101;
       // name.value = 11;
     }, 1000);
