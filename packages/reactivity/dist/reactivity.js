@@ -66,7 +66,11 @@ var ReactiveEffect = class {
     }
   }
   stop() {
-    this.active = false;
+    if (this.active) {
+      this.active = false;
+      preCleanEffect(this);
+      postCleanEffect(this);
+    }
   }
 };
 function cleanDepEffect(dep, effect2) {
@@ -144,7 +148,6 @@ function trigger(target, key, value, oldValue) {
 var mutableHandlers = {
   get(target, key, receiver) {
     if (key === "__v_isReactive" /* ISREACTIVE */) return true;
-    debugger;
     track(target, key);
     let res = Reflect.get(target, key, receiver);
     if (isObject(res)) {
@@ -215,7 +218,7 @@ function trackRefValue(ref2) {
   if (activeEffect) {
     trackEffect(
       activeEffect,
-      ref2.dep = createDep(() => ref2.dep = void 0, "undefined")
+      ref2.dep = ref2.dep || createDep(() => ref2.dep = void 0, "undefined")
     );
   }
 }
@@ -343,10 +346,20 @@ function doWatch(source, cb, { deep, immediate }) {
   } else if (isFunction(source)) {
     getter = source;
   }
+  let clean;
+  const onCleanup = (fn) => {
+    clean = () => {
+      fn();
+      clean = void 0;
+    };
+  };
   const job = () => {
     if (cb) {
       const newValue = effect2.run();
-      cb(newValue, oldValue);
+      if (clean) {
+        clean();
+      }
+      cb(newValue, oldValue, onCleanup);
       oldValue = newValue;
     } else {
       effect2.run();
@@ -357,12 +370,15 @@ function doWatch(source, cb, { deep, immediate }) {
     if (immediate) {
       job();
     } else {
-      debugger;
       oldValue = effect2.run();
     }
   } else {
     effect2.run();
   }
+  const unwatch = () => {
+    effect2.stop();
+  };
+  return unwatch;
 }
 export {
   ReactiveEffect,

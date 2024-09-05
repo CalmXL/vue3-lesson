@@ -75,10 +75,23 @@ function doWatch(source, cb, { deep, immediate }) {
     getter = source;
   }
 
+  let clean;
+  const onCleanup = (fn) => {
+    clean = () => {
+      fn();
+      clean = undefined;
+    };
+  };
+
   const job = () => {
     if (cb) {
       const newValue = effect.run();
-      cb(newValue, oldValue);
+
+      if (clean) {
+        clean(); // 在执行回调前, 先调用上一次清理
+      }
+
+      cb(newValue, oldValue, onCleanup);
       oldValue = newValue;
     } else {
       effect.run();
@@ -91,11 +104,16 @@ function doWatch(source, cb, { deep, immediate }) {
     if (immediate) {
       job();
     } else {
-      debugger;
       oldValue = effect.run();
     }
   } else {
     // watchEffect 直接执行
     effect.run();
   }
+
+  const unwatch = () => {
+    effect.stop();
+  };
+
+  return unwatch;
 }

@@ -7,7 +7,6 @@ export const mutableHandlers: ProxyHandler<any> = {
   get(target, key, receiver) {
     if (key === ReactiveFlags.ISREACTIVE) return true;
     // 依赖收集
-    debugger;
     track(target, key);
     // 取值，响应式属性 和 effect 映射
     let res = Reflect.get(target, key, receiver);

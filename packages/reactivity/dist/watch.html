@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app"></div>
+  </body>
 
   <script type="module">
     // import {
@@ -24,19 +26,19 @@
       watchEffect,
     } from './reactivity.js';
 
-    const state = reactive({
-      name: 'xl',
-      age: 28,
-      address: {
-        n: 1,
-        dog: {
-          name: 'dog',
-          age: 1,
-        },
-      },
-    });
+    // const state = reactive({
+    //   name: 'xl',
+    //   age: 28,
+    //   address: {
+    //     n: 1,
+    //     dog: {
+    //       name: 'dog',
+    //       age: 1,
+    //     },
+    //   },
+    // });
 
-    const name = ref('xl');
+    // const name = ref('xl');
 
     // watch(
     //   state,
@@ -68,25 +70,81 @@
     //   }
     // );
 
-    watch(
-      state,
-      (newValue, oldValue) => {
-        console.log(newValue, oldValue);
-      },
-      {
-        deep: true,
-      }
-    );
+    // const unWatch = watch(
+    //   state,
+    //   (newValue, oldValue, onCleanup) => {
+    //     console.log(newValue, oldValue);
+    //   },
+    //   {
+    //     deep: true,
+    //   }
+    // );
 
     // ---------------------watchEffect----------------------
     // watchEffect(() => {
     //   console.log(state.name, state.age);
     // });
 
+    // setTimeout(() => {
+    //   state.address.dog.name = 'coolDog';
+    //   // unWatch();
+    //   // state.address.n = 101;
+    //   // name.value = 11;
+    // }, 1000);
+
+    // setTimeout(() => {
+    //   unWatch();
+    // }, 1500);
+
+    // setTimeout(() => {
+    //   state.address.dog.name = 'coolCoolDog';
+    //   state.address.dog.name = 'coolCoolDogdog';
+    // }, 2000);
+
+    // ---------------------onCleanup-----------------
+    // onCleanup: 用于注册副作用清理的回调函数,
+    const val = ref('');
+    function getData(timer) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(timer);
+        }, timer);
+      });
+    }
+    let timer = 3000;
+
+    let queue = [];
+
+    watch(
+      () => val.value,
+      async (newValue, oldValue, onCleanup) => {
+        let flag = true;
+
+        // for (let i = 0; i < queue.length; i++) {
+        //   queue[i]();
+        // }
+        // queue.push(() => (flag = false));
+
+        onCleanup(() => {
+          flag = false;
+        });
+
+        timer -= 1000;
+        let r = await getData(timer);
+        if (flag) {
+          // 根据 flag 的值判断渲染与否
+          app.innerHTML = r;
+        }
+      },
+      {
+        flush: 'sync',
+      }
+    );
+
+    // 第一次请求 2s 后返回 2000, 第二次请求 1s 后返回 1000
     setTimeout(() => {
-      state.address.dog.name = 'coolDog';
-      // state.address.n = 101;
-      // name.value = 11;
+      val.value = 'a';
+      val.value = 'b';
     }, 1000);
   </script>
 </html>
