@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>runtime-dom</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="module">
+    import {
+      createRenderer,
+      render,
+      h,
+    } from '/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-browser.js';
+
+    // 1. createRenderer 我们可以自己创建渲染器
+    // 2. render 用内置的渲染器进行渲染 (渲染 DOM 元素的)
+    // 3. h 方法可以创建虚拟dom
+    // console.log(createRenderer, render, h);
+
+    let ele = h('h1', 'xl');
+    console.log(ele);
+
+    // render(ele, app);
+
+    const renderer = createRenderer({
+      createElement(type) {
+        // 需要创建一个元素
+        const dom = document.createElement(type);
+        return dom;
+      },
+      setElementText(el, text) {
+        el.textContent = text;
+      },
+      insert(el, container) {
+        container.appendChild(el);
+      },
+    });
+
+    renderer.render(ele, app);
+  </script>
+</html>
