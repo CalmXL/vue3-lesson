@@ -20,24 +20,40 @@
     // 3. h 方法可以创建虚拟dom
     // console.log(createRenderer, render, h);
 
-    let ele = h('h1', 'xl');
+    // runtime-dom 它的作用就是提供 DOM API 提供了一系列 dom 方法
+    // @vue/runtime-dom -> @vue/runtime-core -> @vue/reactivity
+
+    import { renderOptions } from './runtime-dom.js';
+
+    let ele = h(
+      'h1',
+      {
+        style: { color: 'orange' },
+        class: 'h1',
+        onClick: () => alert(111),
+        a: 1,
+      },
+      'xl'
+    );
     console.log(ele);
 
     // render(ele, app);
 
-    const renderer = createRenderer({
-      createElement(type) {
-        // 需要创建一个元素
-        const dom = document.createElement(type);
-        return dom;
-      },
-      setElementText(el, text) {
-        el.textContent = text;
-      },
-      insert(el, container) {
-        container.appendChild(el);
-      },
-    });
+    // const renderer = createRenderer({
+    //   createElement(type) {
+    //     // 需要创建一个元素
+    //     const dom = document.createElement(type);
+    //     return dom;
+    //   },
+    //   setElementText(el, text) {
+    //     el.textContent = text;
+    //   },
+    //   insert(el, container) {
+    //     container.appendChild(el);
+    //   },
+    // });
+
+    const renderer = createRenderer(renderOptions);
 
     renderer.render(ele, app);
   </script>

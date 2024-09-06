@@ -48,11 +48,9 @@ export function track(target, key) {
  * * 触发更新
  * @param target   目标对象
  * @param key      键值
- * @param value    新值
- * @param oldValue 旧值
  * @returns
  */
-export function trigger(target, key, value, oldValue) {
+export function trigger(target, key) {
   const deps = targetMap.get(target);
 
   if (!deps) return;
