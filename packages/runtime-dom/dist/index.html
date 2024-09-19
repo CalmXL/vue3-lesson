@@ -10,8 +10,8 @@
   </body>
   <script type="module">
     import {
-      createRenderer,
-      render,
+      // createRenderer,
+      // render,
       h,
     } from '/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-browser.js';
 
@@ -23,19 +23,20 @@
     // runtime-dom 它的作用就是提供 DOM API 提供了一系列 dom 方法
     // @vue/runtime-dom -> @vue/runtime-core -> @vue/reactivity
 
-    import { renderOptions } from './runtime-dom.js';
+    import { renderOptions, render } from './runtime-dom.js';
 
-    let ele = h(
-      'h1',
-      {
-        style: { color: 'orange' },
-        class: 'h1',
-        onClick: () => alert(111),
-        a: 1,
-      },
-      'xl'
-    );
-    console.log(ele);
+    // -----------------------runtime-dom------------------
+    // let ele = h(
+    //   'h1',
+    //   {
+    //     style: { color: 'orange' },
+    //     class: 'h1',
+    //     onClick: () => alert(111),
+    //     a: 1,
+    //   },
+    //   'xl'
+    // );
+    // console.log(ele);
 
     // render(ele, app);
 
@@ -53,8 +54,35 @@
     //   },
     // });
 
-    const renderer = createRenderer(renderOptions);
+    // const renderer = createRenderer(renderOptions);
 
-    renderer.render(ele, app);
+    // renderer.render(ele, app);
+
+    // ---------------runtime-core--------------------
+
+    let ele = h(
+      'h1',
+      {
+        style: { color: 'orange' },
+        class: 'h1',
+        onClick: () => alert(111),
+        a: 1,
+      },
+      'xl'
+    );
+
+    let ele2 = h(
+      'h1',
+      {
+        style: { color: 'pink' },
+      },
+      'xh'
+    );
+
+    render(ele, app);
+
+    setTimeout(() => {
+      render(ele2, app);
+    }, 3000);
   </script>
 </html>
