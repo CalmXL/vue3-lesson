@@ -21,7 +21,7 @@ export const mutableHandlers: ProxyHandler<any> = {
     let oldValue = target[key];
     let result = Reflect.set(target, key, value, receiver);
     if (oldValue !== value) {
-      trigger(target, key, value, oldValue);
+      trigger(target, key);
     }
     return result;
   },

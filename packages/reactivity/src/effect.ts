@@ -62,7 +62,7 @@ export class ReactiveEffect {
   public active = true; // 创建的 effect 是响应的
   _trackId = 0; // 用于记录当前 effect 执行了几次
   _depsLength = 0; // 默认收集个数，用于保证deps顺序
-  _running = 0;
+  _running = 0; // 用于记录当前 effect 是否正在执行
   _dirtyLevel = DirtyLevels.Dirty; // 用于计算属性记录, 当前属性使用缓存还是更新
   deps = []; // 用于记录 dep
 
