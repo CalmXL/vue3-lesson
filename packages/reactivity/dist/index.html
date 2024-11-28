@@ -10,19 +10,19 @@
   </head>
   <body>
     <div id="app"></div>
-    <!-- <script type="module">
+    <script type="module">
       // import {
       //   reactive,
       //   effect,
       // } from '/node_modules/@vue/reactivity/dist/reactivity.esm-browser.js';
-      // import { reactive, effect } from './reactivity.js';
+      import { reactive, effect } from './reactivity.js';
 
-      // const obj = {
-      //   name: 'xl',
-      //   age: 30,
-      // };
+      const obj = {
+        name: 'xl',
+        age: 30,
+      };
       // 1. 对同一个对象进行响应式处理, 我们应该做缓存
-      // const state1 = reactive(obj);
+      const state1 = reactive(obj);
       // const state2 = reactive(obj);
       // 2. 对已经进行响应处理的对象，再次处理，应该不需要重复处理
       // state1 被代理过，一定具有 get, set 方法
@@ -181,7 +181,7 @@
       // effect(() => {
       //   console.log(proxy.name, proxy.age, proxy.a);
       // });
-    </script> -->
+    </script>
 
     <!-- <script type="module">
       // import {
